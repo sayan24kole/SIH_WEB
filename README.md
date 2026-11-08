@@ -1,6 +1,16 @@
-# Sudharsan pagal hai
-# Aur Sayan mere se bhi ek kadham upar
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-```
-(btw aj tak is readme ko change kardena, warna mai manunga tu kuch kaam nahi kar raha)
-```
+# MSS <br>
+## SIH (PS ID: 26049)
+<br><br>
+This repo contains the source code of the website we deployed for better project demonstration
+<br>
+## Contributers:-
+
+
+| Contributer | <center> Contribution </center> |
+| :---: | :---: |
+| B T Sudharsan | Merged images, formatted text <br> & created frontend |
+| Sayan Kole | Deployed the website, created <br> the backend |
+
+
+<br><br>
+You can visit the live website here: [Deployed site](https://sih-web1.onrender.com/)
