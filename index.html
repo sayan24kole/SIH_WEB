@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIH 2026 Hardware Prototype | [ENTER PROJECT TITLE]</title>
-  
-  <!-- Tailwind CSS CDN -->
+  <title>AES-HAA | SIH 2026 Hardware Prototype</title>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <script>
     tailwind.config = {
@@ -26,21 +28,31 @@
           colors: {
             brand: {
               50: '#f0fdfa',
+              400: '#2dd4bf',
               500: '#14b8a6',
               600: '#0d9488',
-              glow: '#2dd4bf',
+              glow: '#5eead4',
             }
           }
         }
       }
     }
   </script>
+
   <style>
     .bg-grid-pattern {
-      background-size: 30px 30px;
+      background-size: 32px 32px;
       background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    
+    .card-hover {
+      transition: all 0.25s ease;
+    }
+    .card-hover:hover {
+      border-color: rgba(45, 212, 191, 0.4);
+      transform: translateY(-2px);
     }
   </style>
 </head>
@@ -48,554 +60,592 @@
 <body class="bg-[#0b0f17] text-slate-200 font-sans antialiased selection:bg-brand-500 selection:text-black">
 
   <!-- ================= NAVBAR ================= -->
-  <nav class="fixed top-0 left-0 w-full z-50 bg-[#0b0f17]/90 backdrop-blur-md border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <span class="p-2 bg-brand-500/10 border border-brand-500/30 rounded-lg text-brand-glow font-mono font-bold text-xs">
-          <i class="fa-solid fa-microchip mr-1.5"></i>SIH 2026
+  <nav class="fixed top-0 left-0 w-full z-50 bg-[#0b0f17]/90 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="px-2.5 py-1.5 bg-brand-500/10 border border-brand-500/30 rounded-lg text-brand-glow font-mono font-bold text-xs flex items-center gap-1.5">
+          <i class="fa-solid fa-microchip text-[11px]"></i>SIH 2026
         </span>
-        <!-- [NAVBAR BRAND/TEAM NAME] -->
         <span class="font-bold tracking-tight text-white hidden sm:inline">MSS</span>
       </div>
 
-      <div class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-300">
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
         <a href="#about" class="hover:text-brand-glow transition">Problem & Solution</a>
-        <a href="#sensors" class="hover:text-brand-glow transition">Sensors & Hardware</a>
-        <a href="#roadmap" class="hover:text-brand-glow transition">Breadboard to PCB</a>
-        <a href="#gallery" class="hover:text-brand-glow transition">Prototype Photos</a>
-        <a href="#feasibility" class="hover:text-brand-glow transition">Feasibility & Impact</a>
+        <a href="#sensors" class="hover:text-brand-glow transition">Hardware</a>
+        <a href="#roadmap" class="hover:text-brand-glow transition">Roadmap</a>
+        <a href="#gallery" class="hover:text-brand-glow transition">Gallery</a>
+        <a href="#feasibility" class="hover:text-brand-glow transition">Impact</a>
         <a href="#team" class="hover:text-brand-glow transition">Team</a>
       </div>
 
-      <div>
-        <a href="#gallery" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-slate-950 font-semibold text-xs uppercase tracking-wider rounded-lg transition shadow-lg shadow-brand-500/20 inline-flex items-center gap-2">
-          <span>View Hardware</span>
-          <i class="fa-solid fa-arrow-right text-[10px]"></i>
-        </a>
-      </div>
+      <a href="#gallery" class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-slate-950 font-semibold text-xs uppercase tracking-wider rounded-lg transition shadow-lg shadow-brand-500/20 inline-flex items-center gap-2">
+        <span>View Hardware</span>
+        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
     </div>
   </nav>
 
-  <!-- ================= HERO SECTION (SLIDE 1) ================= -->
-  <header class="relative pt-32 pb-20 overflow-hidden bg-grid-pattern border-b border-slate-800">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-    <div class="max-w-6xl mx-auto px-6 relative z-10 text-center">
+  <!-- ================= HERO ================= -->
+  <header class="relative pt-28 pb-16 sm:pt-32 sm:pb-20 overflow-hidden bg-grid-pattern border-b border-slate-800">
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-500/8 rounded-full blur-3xl pointer-events-none"></div>
+    
+    <div class="max-w-5xl mx-auto px-5 sm:px-6 relative z-10 text-center">
       
-      <!-- SIH INFO BADGES -->
-      <div class="flex flex-wrap justify-center items-center gap-2 mb-6 font-mono text-xs">
-        <span class="px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-slate-300">
+      <!-- Badges -->
+      <div class="flex flex-wrap justify-center items-center gap-2 mb-7 font-mono text-[11px] sm:text-xs">
+        <span class="px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300">
           PS ID: <strong class="text-white">SIH26049</strong>
         </span>
-        <span class="px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-brand-400">
-          Category: <strong class="text-white">Hardware Edition</strong>
+        <span class="px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-brand-400">
+          Category: <strong class="text-white">Hardware</strong>
         </span>
-        <span class="px-3 py-1 rounded-full bg-slate-900 border border-slate-700 text-amber-400">
+        <span class="px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-amber-400">
           Theme: <strong class="text-white">Smart Automation</strong>
         </span>
       </div>
 
-      <!-- MAIN PROJECT TITLE -->
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+      <!-- Title -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
         AES-HAA
       </h1>
-
-      <!-- BRIEF SUMMARY -->
-      <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-        AES-HAA is a low-cost, COTS-based hardware survivability platform engineered to enhance the reliability and lifespan of electronic and battery systems operating in the extreme subzero temperatures (-35°C) and low-pressure conditions of Ladakh.
-It integrates a zero-parasitic 3D spatial-thermal BMS that recycles internal Joule heat to warm frozen battery cells, an adaptive dynamic DRAM refresh system with gate-level radiation hardening (TMR) to prevent cosmic-ray bit-flips, and a dual-mode fluid loop with anti-arcing coatings.
-By avoiding expensive military-grade components, it delivers an affordable, ruggedized plug-and-play solution that prevents mission dropouts and electronic burnout across defense UAVs, radar outposts, and high-altitude telecom infrastructure.
+      
+      <p class="mt-3 text-brand-400 font-medium text-sm sm:text-base tracking-wide">
+        Adaptive Electronics & Survivability Platform for High-Altitude Operations
       </p>
 
-      <!-- HARDWARE QUICK BADGES -->
-      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto font-mono text-left">
-        <div class="p-4 bg-slate-900/90 border border-slate-800 rounded-xl">
-          <div class="text-[11px] text-slate-500 uppercase">Core MCU</div>
-          <div class="text-sm font-bold text-white mt-1">Raspberry pi pico</div>
+      <!-- Short Description -->
+      <p class="mt-6 text-base sm:text-[17px] text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        A low-cost COTS hardware platform that keeps batteries and electronics alive at −35°C and high altitudes in Ladakh — without expensive military-grade components.
+      </p>
+
+      <!-- Key Metrics -->
+      <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
+        <div class="p-4 bg-slate-900/80 border border-slate-800 rounded-xl text-left">
+          <div class="text-[10px] text-slate-500 uppercase tracking-wider font-mono">Core MCU</div>
+          <div class="text-sm font-bold text-white mt-1">Raspberry Pi Pico</div>
         </div>
-        <div class="p-4 bg-slate-900/90 border border-slate-800 rounded-xl">
-          <div class="text-[11px] text-slate-500 uppercase">Current Stage</div>
+        <div class="p-4 bg-slate-900/80 border border-slate-800 rounded-xl text-left">
+          <div class="text-[10px] text-slate-500 uppercase tracking-wider font-mono">Current Stage</div>
           <div class="text-sm font-bold text-amber-400 mt-1">Breadboard Tested</div>
         </div>
-        <div class="p-4 bg-slate-900/90 border border-slate-800 rounded-xl">
-          <div class="text-[11px] text-slate-500 uppercase">Final Stage</div>
+        <div class="p-4 bg-slate-900/80 border border-slate-800 rounded-xl text-left">
+          <div class="text-[10px] text-slate-500 uppercase tracking-wider font-mono">Target</div>
           <div class="text-sm font-bold text-brand-400 mt-1">Custom 2-Layer PCB</div>
         </div>
-        <div class="p-4 bg-slate-900/90 border border-slate-800 rounded-xl">
-          <div class="text-[11px] text-slate-500 uppercase">Team ID</div>
-          <div class="text-sm font-bold text-emerald-400 mt-1">Null</div>
+        <div class="p-4 bg-slate-900/80 border border-slate-800 rounded-xl text-left">
+          <div class="text-[10px] text-slate-500 uppercase tracking-wider font-mono">BOM Cost</div>
+          <div class="text-sm font-bold text-emerald-400 mt-1">≈ ₹2,800</div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ================= SECTION 1: PROPOSED SOLUTION (SLIDE 2) ================= -->
-  <section id="about" class="py-20 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">Slide 2</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Problem & Proposed Solution</h3>
+  <!-- ================= PROBLEM & SOLUTION ================= -->
+  <section id="about" class="py-16 sm:py-20 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">Slide 2</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Problem & Proposed Solution</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- The Problem -->
-        <div class="p-8 rounded-2xl bg-slate-900/60 border border-rose-900/30">
-          <div class="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400 mb-6 text-lg">
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- Problem -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-rose-900/40">
+          <div class="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400 mb-5 text-lg">
             <i class="fa-solid fa-triangle-exclamation"></i>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">The Problem We Are Addressing</h4>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">
-            Operating electronics and batteries at altitudes above 10,000–18,000 ft in Ladakh faces three severe environmental threats:
+          <h3 class="text-xl font-bold text-white mb-3">The Problem</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-5">
+            Electronics and batteries operating above 10,000–18,000 ft in Ladakh face three critical threats:
           </p>
-          <ul class="space-y-2 text-sm text-slate-400">
-            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-1"></i> Extreme Subzero Temperatures (down to -35°C):
-Battery capacity collapses due to frozen electrolytes, causing premature undervoltage shutdowns in drones and communication radios.
-Standard heating pads drain the battery they are supposed to protect.</li>
-            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-1"></i> Low Atmospheric Pressure (Thin Air):
-Natural air cooling fails, causing power amplifiers and processors to overheat.
-The dielectric strength of air drops significantly, leading to electrical arcing and component burnout across PCB traces.</li>
-            <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-1"></i> Elevated Cosmic Radiation:
-High-altitude cosmic rays trigger Single Event Upsets (SEUs)—flipping memory bits in DRAM and causing flight controllers, avionics, and GPS systems to crash mid-mission.</li>
           
-		  <li class="flex items-start gap-2"><i class="fa-solid fa-xmark text-rose-500 mt-1"></i> The Cost/Supply Hurdle: True military-grade (Mil-Spec) radiation/thermal-hardened hardware is extremely expensive and restricted by foreign export bans (ITAR).</li>
+          <ul class="space-y-3.5 text-sm text-slate-400">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-xmark text-rose-500 mt-0.5 shrink-0"></i>
+              <span><strong class="text-slate-300">Extreme cold (−35°C)</strong> — Battery capacity collapses due to frozen electrolytes. External heaters drain the very battery they try to protect.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-xmark text-rose-500 mt-0.5 shrink-0"></i>
+              <span><strong class="text-slate-300">Low atmospheric pressure</strong> — Air cooling fails and dielectric strength drops, causing arcing and component burnout.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-xmark text-rose-500 mt-0.5 shrink-0"></i>
+              <span><strong class="text-slate-300">Cosmic radiation</strong> — High-altitude SEUs flip bits in DRAM, crashing flight controllers and GPS mid-mission.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-xmark text-rose-500 mt-0.5 shrink-0"></i>
+              <span><strong class="text-slate-300">Cost barrier</strong> — True Mil-Spec radiation/thermal-hardened parts are expensive and restricted by ITAR.</span>
+            </li>
           </ul>
         </div>
 
-        <!-- The Solution -->
-        <div class="p-8 rounded-2xl bg-slate-900/60 border border-brand-500/30">
-          <div class="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-glow mb-6 text-lg">
+        <!-- Solution -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-brand-500/30">
+          <div class="w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-glow mb-5 text-lg">
             <i class="fa-solid fa-lightbulb"></i>
           </div>
-          <h4 class="text-xl font-bold text-white mb-3">Our Proposed Hardware Solution</h4>
-          <p class="text-slate-400 text-sm leading-relaxed mb-4">
-            The Adaptive Electronics & Survivability Platform (AES-HAA) solves this using a 3-pillar, low-cost COTS (Commercial Off-The-Shelf) architecture:
+          <h3 class="text-xl font-bold text-white mb-3">Our Solution — AES-HAA</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-5">
+            A 3-pillar, low-cost COTS architecture that delivers military-grade survivability:
           </p>
-          <ul class="space-y-2 text-sm text-slate-300">
-            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-glow mt-1"></i> Pillar 1: 3D Spatial-Thermal BMS (Power & Battery)
-Zero-Parasitic Joule Self-Heating: Instead of power-hungry external heaters, it traps the battery’s own internal resistance (
-I
-2
-R
-I 
-2
- R
-) heat to warm up frozen cells from the inside out.
-Dynamic Current Steering: Uses discrete N-MOSFETs to route charging/discharging current away from hot inner cells toward freezing outer cells when 
-Δ
-T
->
-3
-∘
-C
-ΔT>3 
-∘
- C
-, cutting cell state-of-charge divergence (
-Δ
-SoC
-ΔSoC
-) from 68% down to 15%.</li>
-            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-glow mt-1"></i> Pillar 2: Rad-Hard & Adaptive Computing (Avionics & Logic)
-Adaptive Dynamic Refresh (ATREF): At -35°C, silicon leakage drops dramatically. The system dynamically slows down DRAM refresh cycles, slashing standby power by up to 70%.
-Gate-Level Radiation Immunity (TMR): Uses low-cost discrete logic (74HC00 + 74HC153 multiplexer) to implement hardware-level Triple Modular Redundancy (TMR). If a cosmic ray flips a bit, the majority voting circuit instantly corrects it in hardware with zero latency.</li>
-            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-glow mt-1"></i> Pillar 3: Dual-Mode Loop & Rugged Shell (Structure & Cooling)
-Low-Pressure Phase-Change Loop: A sealed binary ethanol-water heat-pipe loop provides passive thermal clamping—enabling a sub-98-second cold-start jumpstart while preventing overheating in low-density air.
-Anti-Arcing & Insulation Wrap: Encased in a lightweight Silica Aerogel blanket for thermal retention, combined with a Parylene-C conformal coating that completely prevents dielectric breakdown and arcing in thin air.</li>
+          
+          <ul class="space-y-3.5 text-sm text-slate-300">
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-brand-glow mt-0.5 shrink-0"></i>
+              <span><strong class="text-white">3D Spatial-Thermal BMS</strong> — Zero-parasitic Joule self-heating traps the battery’s own I²R heat. Dynamic current steering via discrete N-MOSFETs cuts ΔSoC from 68% → 15%.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-brand-glow mt-0.5 shrink-0"></i>
+              <span><strong class="text-white">Rad-Hard Adaptive Computing</strong> — Adaptive DRAM refresh (up to 70% lower standby power at −35°C) + gate-level TMR using discrete logic for zero-latency SEU correction.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i class="fa-solid fa-check text-brand-glow mt-0.5 shrink-0"></i>
+              <span><strong class="text-white">Dual-Mode Thermal Loop</strong> — Sealed ethanol-water heat-pipe + Silica Aerogel + Parylene-C coating for cold-start jumpstart and anti-arcing protection in thin air.</span>
+            </li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 2: SENSORS & TECHNICAL STACK (SLIDE 3) ================= -->
-  <section id="sensors" class="py-20 bg-slate-950/40 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">Slide 3: Technical Approach</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Hardware Components & Sensors Used</h3>
+  <!-- ================= HARDWARE COMPONENTS ================= -->
+  <section id="sensors" class="py-16 sm:py-20 bg-slate-950/40 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">Slide 3 · Technical Approach</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Hardware Components & Sensors</h2>
         <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">
-          Specific modules, sensors, and microcontrollers currently wired and operational on our breadboard testing rig.
+          Modules currently wired and operational on the breadboard test rig.
         </p>
       </div>
 
-      <!-- SENSORS GRID -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         
-        <!-- SENSOR / COMPONENT 1 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- MCU -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-microchip"></i></span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-microchip"></i></span>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-500/10 text-brand-400">Main MCU</span>
           </div>
-          <h4 class="text-base font-bold text-white">Raspberry pi pico</h4>
-          <p class="text-xs text-brand-400 font-mono mt-0.5">Raspberry pi oscilloscope</p>
+          <h3 class="text-base font-bold text-white">Raspberry Pi Pico</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">RP2040</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Handles variable refresh rate, temperature sensing, and the main BMS code. Also works as oscilloscope in thonny plotter.
+            Handles adaptive refresh, temperature sensing, and BMS control logic. Also used with Thonny plotter as a basic oscilloscope.
           </p>
         </div>
 
-        <!-- SENSOR / COMPONENT 2 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- Temp Sensor -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-satellite-dish"></i></span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sensor 1</span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-temperature-half"></i></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sensor</span>
           </div>
-          <h4 class="text-base font-bold text-white">Temperature sensor</h4>
-          <p class="text-xs text-brand-400 font-mono mt-0.5">lm35</p>
+          <h3 class="text-base font-bold text-white">LM35 Temperature Sensor</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Analog</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Measures temperature of surrounding and the battery.
+            Measures ambient and individual cell temperatures for ΔT calculation and adaptive refresh control.
           </p>
         </div>
 
-        <!-- SENSOR / COMPONENT 3 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- MOSFETs -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-gauge-high"></i></span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sensor 2</span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-bolt"></i></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Switching</span>
           </div>
-          <h4 class="text-base font-bold text-white">N-MOSFETs</h4>
-          <p class="text-xs text-brand-400 font-mono mt-0.5">2N7000</p>
+          <h3 class="text-base font-bold text-white">2N7000 N-MOSFETs</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Discrete</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Acts as a gate for battery and as a transister in 1t1c
+            Used for dynamic current steering between battery cells and as access transistors in the 1T1C DRAM test cells.
           </p>
         </div>
 
-        <!-- SENSOR / COMPONENT 4 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- Logic ICs -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-wave-square"></i></span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Sensor 3 (ICs)</span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-wave-square"></i></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Logic</span>
           </div>
-          <h4 class="text-base font-bold text-white"></h4> 
-          <p class="text-xs text-brand-400 font-mono mt-0.5">74HC244 & lm399</p>
+          <h3 class="text-base font-bold text-white">74HC244 + Logic ICs</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Octal Buffer / TMR</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Acts as an octal buffer and sensing 0 and 1 in dram
+            Octal buffer and discrete logic used for DRAM sense/drive and hardware-level Triple Modular Redundancy voting.
           </p>
         </div>
 
-        <!-- SENSOR / COMPONENT 5 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- Battery -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-bolt"></i></span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Power Circuit</span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-battery-three-quarters"></i></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Power</span>
           </div>
-          <h4 class="text-base font-bold text-white">Li-ion cell 3.7V - 18650</h4>
-          <p class="text-xs text-brand-400 font-mono mt-0.5">3.7 volts dual battery</p>
+          <h3 class="text-base font-bold text-white">18650 Li-ion Cells</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">3.7 V Dual Pack</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Main battery config for the BMS
+            Main energy storage used for BMS thermal and current-steering experiments.
           </p>
         </div>
 
-        <!-- SENSOR / COMPONENT 6 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl hover:border-brand-500/40 transition">
+        <!-- Potentiometer -->
+        <div class="p-5 bg-slate-900 border border-slate-800 rounded-xl card-hover">
           <div class="flex items-center justify-between mb-4">
-            <span class="text-brand-glow text-xl"><i class="fa-solid fa-tower-broadcast"></i></span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Other components</span>
+            <span class="text-brand-glow text-lg"><i class="fa-solid fa-sliders"></i></span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Debug</span>
           </div>
-          <h4 class="text-base font-bold text-white">potentiometer</h4>
-          <p class="text-xs text-brand-400 font-mono mt-0.5"></p>
+          <h3 class="text-base font-bold text-white">Potentiometer</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Tuning</p>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed">
-            Used for debugging and circuit regulation
+            Used for threshold tuning, voltage division, and rapid debugging during breadboard validation.
           </p>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 3: BREADBOARD TO PCB ROADMAP ================= -->
-  <section id="roadmap" class="py-20 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">Hardware Evolution</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Breadboard Validation to PCB Fabrication</h3>
+  <!-- ================= ROADMAP ================= -->
+  <section id="roadmap" class="py-16 sm:py-20 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">Hardware Evolution</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Breadboard → Custom PCB</h2>
         <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">
-          Current status is a 100% verified breadboard circuit. The final deliverable transitions to an integrated, durable PCB.
+          Fully verified on breadboard. Next step is a compact, rugged 2-layer PCB.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
         
-        <!-- Current: Breadboard Phase -->
-        <div class="p-8 rounded-2xl bg-slate-900/90 border border-amber-500/40">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-4">
-            <i class="fa-solid fa-flask"></i> PHASE 1: CURRENT STATUS (Breadboard)
+        <!-- Phase 1 -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-amber-500/40">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-5">
+            <i class="fa-solid fa-flask"></i> PHASE 1 · CURRENT
           </div>
-          <h4 class="text-2xl font-bold text-white">Breadboard Prototype Testing</h4>
+          <h3 class="text-xl sm:text-2xl font-bold text-white">Breadboard Prototype</h3>
           <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-            In dram lm35 is used to measure surrounding temperature and the refresh is varied according to it. All are visible on oscilloscope.
-			In BMS the dual battery is connected to lm35 to measure each cell temperature, and finally the delta T is calculated and performance is measured.
+            DRAM refresh rate is varied according to LM35 temperature readings (visible on oscilloscope). Dual-cell BMS measures individual temperatures, calculates ΔT, and validates current-steering performance.
           </p>
+          
           <div class="mt-6 space-y-3 font-mono text-xs">
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">Logic & Firmware Test:</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Logic & Firmware</span>
               <span class="text-emerald-400 font-semibold">100% Verified</span>
             </div>
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">Hardware Wiring:</span>
-              <span class="text-amber-400 font-semibold">Breadboard Jumper Tested</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Hardware Wiring</span>
+              <span class="text-amber-400 font-semibold">Breadboard Tested</span>
             </div>
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">Sensor Calibration:</span>
-              <span class="text-slate-300">Completed in thonny Conditions</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Sensor Calibration</span>
+              <span class="text-slate-300">Completed (Thonny)</span>
             </div>
           </div>
         </div>
 
-        <!-- Target: PCB Phase -->
-        <div class="p-8 rounded-2xl bg-slate-900/90 border border-brand-500/40">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-mono mb-4">
-            <i class="fa-solid fa-layer-group"></i> PHASE 2: FINAL TARGET (Custom PCB)
+        <!-- Phase 2 -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/90 border border-brand-500/40">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs font-mono mb-5">
+            <i class="fa-solid fa-layer-group"></i> PHASE 2 · TARGET
           </div>
-          <h4 class="text-2xl font-bold text-white">Fabricated PCB Implementation</h4>
+          <h3 class="text-xl sm:text-2xl font-bold text-white">Custom PCB</h3>
           <p class="text-slate-400 text-sm mt-3 leading-relaxed">
-            PCB layout will be designed in kicad
+            Full schematic and layout will be completed in KiCad. Focus on compact form factor, proper thermal design, and mechanical robustness for high-altitude use.
           </p>
+          
           <div class="mt-6 space-y-3 font-mono text-xs">
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">PCB Substrate:</span>
-              <span class="text-white font-semibold">FR-4 High TG Dual-Layer</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Substrate</span>
+              <span class="text-white font-semibold">FR-4 High-Tg Dual Layer</span>
             </div>
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">Form Factor:</span>
-              <span class="text-brand-400 font-semibold">100mm x 100mm</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Form Factor</span>
+              <span class="text-brand-400 font-semibold">100 × 100 mm</span>
             </div>
-            <div class="flex justify-between border-b border-slate-800 pb-2">
-              <span class="text-slate-500">Enclosure:</span>
-              <span class="text-emerald-400 font-semibold">Custom 3D Printed / IP65 Casing</span>
+            <div class="flex justify-between border-b border-slate-800 pb-2.5">
+              <span class="text-slate-500">Enclosure</span>
+              <span class="text-emerald-400 font-semibold">3D Printed / IP65</span>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ================= SECTION 4: PROTOTYPE PHOTO GALLERY ================= -->
-  <!-- 
-    HOW TO ADD YOUR PHOTOS:
-    1. Create an 'images' folder in the same directory as this file.
-    2. Put your laptop photos inside: images/breadboard.jpg, images/schematic.jpg, etc.
-    3. Replace the placeholder URL in the src="" below with your local path: images/your-photo.jpg
-  -->
-  <section id="gallery" class="py-20 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">Visual Evidence</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Hardware Prototype Gallery</h3>
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="py-16 sm:py-20 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">Visual Evidence</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Hardware Prototype Gallery</h2>
         <p class="text-slate-400 text-sm max-w-xl mx-auto mt-2">
-          Photographic proof of the breadboard assembly, circuit diagrams, and PCB design preview.
+          Breadboard assembly, circuit schematic, and Cadence verification.
         </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Existing 3-Grid Gallery Cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         
-        <!-- PHOTO 1: Breadboard Setup -->
+        <!-- Photo 1 -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-          <div class="h-52 overflow-hidden bg-slate-950 flex items-center justify-center relative">
-            <!-- REPLACE src="images/breadboard.jpg" -->
+          <div class="h-52 overflow-hidden bg-slate-950 relative">
             <img 
               src="images/WhatsApp Image 2026-08-14 at 1.09.24 AM.jpeg" 
               alt="Breadboard Setup" 
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-80" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
+              loading="lazy"
             />
             <span class="absolute bottom-2 left-2 bg-black/80 text-amber-400 font-mono text-[10px] px-2 py-0.5 rounded">
               Current Breadboard Rig
             </span>
           </div>
-          <div class="p-5">
-            <h4 class="font-bold text-white text-sm">Breadboard Working Setup</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Physical breadboard wiring connecting the MCU to all operational sensors of both DRAM and BMS
+          <div class="p-4">
+            <h3 class="font-bold text-white text-sm">Breadboard Working Setup</h3>
+            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+              Physical wiring connecting the Pico to sensors for both DRAM and BMS experiments.
             </p>
           </div>
         </div>
 
-        <!-- PHOTO 2: Circuit Schematic -->
+        <!-- Photo 2 -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-          <div class="h-52 overflow-hidden bg-slate-950 flex items-center justify-center relative">
-            <!-- REPLACE src="images/circuit-diagram.jpg" -->
+          <div class="h-52 overflow-hidden bg-slate-950 relative">
             <img 
               src="images/Screenshot 2026-08-30 175022.png" 
               alt="Circuit Diagram" 
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-80" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
+              loading="lazy"
             />
             <span class="absolute bottom-2 left-2 bg-black/80 text-brand-400 font-mono text-[10px] px-2 py-0.5 rounded">
               Circuit Schematic
             </span>
           </div>
-          <div class="p-5">
-            <h4 class="font-bold text-white text-sm">EDA Schematic & Pinout</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Electrical schematic capture designed in Simscape / Micro-Cap with pin assignment.
+          <div class="p-4">
+            <h3 class="font-bold text-white text-sm">EDA Schematic & Pinout</h3>
+            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+              Electrical schematic with clear pin assignments for the full system.
             </p>
           </div>
         </div>
 
-        <!-- PHOTO 3: PCB Design / 3D Layout -->
+        <!-- Photo 3 -->
         <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group">
-          <div class="h-52 overflow-hidden bg-slate-950 flex items-center justify-center relative">
-            <!-- REPLACE src="images/pcb-model.jpg" -->
+          <div class="h-52 overflow-hidden bg-slate-950 relative">
             <img 
               src="images/Dram_circuit.png" 
-              alt="PCB 3D Layout" 
-              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-80" 
+              alt="Cadence DRAM Layout" 
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
+              loading="lazy"
             />
             <span class="absolute bottom-2 left-2 bg-black/80 text-emerald-400 font-mono text-[10px] px-2 py-0.5 rounded">
-              Cadence layout
+              Cadence Verification
             </span>
           </div>
-          <div class="p-5">
-            <h4 class="font-bold text-white text-sm">Final Cadence Virtuoso DRAM circuit</h4>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-              Cadence layout for varification of circuit in 45 nm gpdk, i.e real case DRAM cells.
+          <div class="p-4">
+            <h3 class="font-bold text-white text-sm">Cadence Virtuoso DRAM</h3>
+            <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
+              Layout verification of DRAM cells in 45 nm GPDK for realistic behavior.
             </p>
           </div>
         </div>
-
       </div>
+
+      <!-- ================= NEW EXTRA SPACE FOR 2 IMAGES ================= -->
+      <div class="mt-8 pt-8 border-t border-slate-800/80">
+        <div class="grid md:grid-cols-2 gap-6">
+          
+          <!-- Image Slot 1: Full Working Setup in Breadboard -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden group card-hover shadow-lg shadow-black/40">
+            <div class="h-64 sm:h-72 overflow-hidden bg-slate-950 relative flex items-center justify-center">
+              <img 
+                src="images/setup.jpg" 
+                alt="The Full Working Setup in Breadboard" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                loading="lazy"
+              />
+              <!-- Fallback placeholder if image not uploaded yet -->
+              <div class="hidden flex-col items-center justify-center p-6 text-center text-slate-500 font-mono text-xs">
+                <i class="fa-solid fa-microchip text-3xl mb-2 text-brand-400/60"></i>
+                <span>Image: images/full-working-breadboard-setup.jpg</span>
+              </div>
+              <span class="absolute bottom-3 left-3 bg-black/80 border border-slate-700/80 text-brand-400 font-mono text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-emerald-400 text-[10px]"></i> Live System Rig
+              </span>
+            </div>
+            <div class="p-5 sm:p-6">
+              <div class="flex items-center justify-between mb-1.5">
+                <h3 class="text-lg font-bold text-white tracking-tight">The Full Working Setup in Breadboard</h3>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-brand-500/10 text-brand-400 uppercase">Prototype</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mt-2">
+                End-to-end integration of the Raspberry Pi Pico, LM35 sensors, discrete N-MOSFET switching matrix, and active DRAM refresh control under live laboratory validation.
+              </p>
+            </div>
+          </div>
+
+          <!-- Image Slot 2: FPGA Board Representation -->
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden group card-hover shadow-lg shadow-black/40">
+            <div class="h-64 sm:h-72 overflow-hidden bg-slate-950 relative flex items-center justify-center">
+              <img 
+                src="images/FPGA.jpg" 
+                alt="FPGA Board Representation" 
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-300 opacity-90"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                loading="lazy"
+              />
+              <!-- Fallback placeholder if image not uploaded yet -->
+              <div class="hidden flex-col items-center justify-center p-6 text-center text-slate-500 font-mono text-xs">
+                <i class="fa-solid fa-server text-3xl mb-2 text-cyan-400/60"></i>
+                <span>Image: images/fpga-board-representation.jpg</span>
+              </div>
+              <span class="absolute bottom-3 left-3 bg-black/80 border border-slate-700/80 text-cyan-400 font-mono text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5">
+                <i class="fa-solid fa-bolt text-amber-400 text-[10px]"></i> Hardware Logic
+              </span>
+            </div>
+            <div class="p-5 sm:p-6">
+              <div class="flex items-center justify-between mb-1.5">
+                <h3 class="text-lg font-bold text-white tracking-tight">FPGA Board Representation</h3>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-400 uppercase">Architecture</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed mt-2">
+                Digital logic and fault-tolerant architecture mapped onto the FPGA testbed, demonstrating gate-level Triple Modular Redundancy (TMR) and SEU mitigation logic.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- ================= END NEW EXTRA SPACE ================= -->
+
     </div>
   </section>
 
-  <!-- ================= SECTION 5: FEASIBILITY & IMPACT (SLIDES 4 & 5) ================= -->
-  <section id="feasibility" class="py-20 bg-slate-950/40 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">Slides 4 & 5</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Feasibility, Viability & Benefits</h3>
+  <!-- ================= FEASIBILITY & IMPACT ================= -->
+  <section id="feasibility" class="py-16 sm:py-20 bg-slate-950/40 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">Slides 4 & 5</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Feasibility, Viability & Benefits</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- Feasibility & Risks -->
-        <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <h4 class="text-xl font-bold text-white mb-3">Feasibility & Risk Mitigation</h4>
-          <div class="space-y-4 text-xs text-slate-300">
-            <div>
-              <span class="text-brand-400 font-mono uppercase font-semibold">Technical Feasibility:</span>
-              <p class="text-slate-400 mt-1">The system is exceptionally easy to manufacture and assemble using 100% low-cost COTS components (~₹2,800 BOM) on standard PCBs, requiring only simple analog resistor-divider tuning for deterministic calibration without complex software.</p>
-            </div>
-            <div>
-              <span class="text-amber-400 font-mono uppercase font-semibold">Potential Challenges & Risks:</span>
-              <p class="text-slate-400 mt-1">Key risks include battery SoC imbalance when temperatures swing from -30°C to +25°C, memory data corruption if dynamic refresh rates are over-slowed, and thin-air electrical arcing at high altitudes.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-mono uppercase font-semibold">Overcoming Strategy:</span>
-              <p class="text-slate-400 mt-1">These are countered by a passive binary fluid jacket that thermally clamps cells (10°C–20°C), hardware-clamped refresh limits (
-T
-m
-a
-x
-≤
-64
- ms
-T 
-max
-​
- ≤64 ms
-) with gate-level TMR parity logic to stop bit loss, and a Parylene-C anti-arcing coating.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Impact & Benefits -->
-        <div class="p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <h4 class="text-xl font-bold text-white mb-3">Impact & Expected Benefits</h4>
-          <div class="space-y-4 text-xs text-slate-300">
-            <div>
-              <span class="text-brand-400 font-mono uppercase font-semibold">Target Audience / Beneficiaries:</span>
-              <p class="text-slate-400 mt-1">Primary users are the Armed Forces and DRDO operating UAVs, avionics, and radar systems at high-altitude forward bases, alongside civilian infrastructure operators managing remote Himalayan 4G/5G telecom towers, weather stations, and avalanche warning radar networks.</p>
-            </div>
-            <div>
-              <span class="text-emerald-400 font-mono uppercase font-semibold">Economic & Social Impact:</span>
-              <p class="text-slate-400 mt-1">Drastically cuts deployment costs by replacing expensive, ITAR-restricted military-grade ICs with standard COTS silicon (~₹2,800 BOM), while socially enabling uninterrupted 24/7 communications, automated disaster alerts, and secure border operations in isolated regions</p>
-            </div>
-            <div>
-              <span class="text-amber-400 font-mono uppercase font-semibold">Environmental Impact:</span>
-              <p class="text-slate-400 mt-1">Operates with 0W parasitic power waste by recycling internal 
-I
-2
-R
-I 
-2
- R
- battery heat, which preserves energy and significantly reduces hazardous battery and electronic waste in the ecologically fragile Himalayan ecosystem.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SECTION 6: TEAM (EXACTLY 6 MEMBERS) ================= -->
-  <section id="team" class="py-20 border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="text-center mb-16">
-        <h2 class="text-xs font-mono uppercase tracking-widest text-brand-500">The Team</h2>
-        <h3 class="text-3xl font-bold text-white mt-1">Smart India Hackathon 2026 Team</h3>
-        <p class="text-xs font-mono text-slate-400 mt-2">Team Name: <span class="text-white font-bold">MSS</span></p>
-      </div>
-
-      <!-- 6 MEMBERS GRID (2 rows of 3 on desktop) -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
         
-        <!-- MEMBER 1 (Team Leader) -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-user-astronaut"></i>
+        <!-- Feasibility -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <h3 class="text-xl font-bold text-white mb-5">Feasibility & Risk Mitigation</h3>
+          
+          <div class="space-y-5 text-sm">
+            <div>
+              <p class="text-brand-400 font-mono text-xs uppercase font-semibold tracking-wider">Technical Feasibility</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                Built entirely with low-cost COTS parts (≈ ₹2,800 BOM) on standard PCBs. Calibration uses simple analog resistor dividers — no complex firmware dependency.
+              </p>
+            </div>
+            <div>
+              <p class="text-amber-400 font-mono text-xs uppercase font-semibold tracking-wider">Key Risks</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                SoC imbalance during large temperature swings, potential data loss if refresh is slowed too aggressively, and thin-air arcing at altitude.
+              </p>
+            </div>
+            <div>
+              <p class="text-emerald-400 font-mono text-xs uppercase font-semibold tracking-wider">Mitigation Strategy</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                Passive binary fluid jacket clamps cell temperature, hardware-clamped refresh limits (T<sub>max</sub> ≤ 64 ms) + TMR voting, and Parylene-C anti-arcing coating.
+              </p>
+            </div>
           </div>
-          <h4 class="font-bold text-white text-base">Sayan Kole</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
         </div>
 
-        <!-- MEMBER 2 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-user-gear"></i>
+        <!-- Impact -->
+        <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <h3 class="text-xl font-bold text-white mb-5">Impact & Expected Benefits</h3>
+          
+          <div class="space-y-5 text-sm">
+            <div>
+              <p class="text-brand-400 font-mono text-xs uppercase font-semibold tracking-wider">Target Users</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                Armed Forces & DRDO (UAVs, avionics, radar) and civilian operators of high-altitude telecom towers, weather stations, and avalanche warning systems.
+              </p>
+            </div>
+            <div>
+              <p class="text-emerald-400 font-mono text-xs uppercase font-semibold tracking-wider">Economic & Social Impact</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                Replaces expensive ITAR-restricted parts with affordable COTS silicon. Enables reliable 24/7 communications and disaster-alert systems in remote Himalayan regions.
+              </p>
+            </div>
+            <div>
+              <p class="text-amber-400 font-mono text-xs uppercase font-semibold tracking-wider">Environmental Impact</p>
+              <p class="text-slate-400 mt-1.5 leading-relaxed">
+                Zero parasitic heater power by recycling internal I²R heat. Reduces battery and electronics waste in the fragile high-altitude ecosystem.
+              </p>
+            </div>
           </div>
-          <h4 class="font-bold text-white text-base">B T Sudharsan</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TEAM ================= -->
+  <section id="team" class="py-16 sm:py-20 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6">
+      <div class="text-center mb-12 sm:mb-14">
+        <p class="text-xs font-mono uppercase tracking-widest text-brand-500">The Team</p>
+        <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Smart India Hackathon 2026</h2>
+        <p class="text-xs font-mono text-slate-400 mt-2">
+          Team Name: <span class="text-white font-bold">MSS</span>
+        </p>
+      </div>
+
+      <!-- Single Team Photo (Update path when ready for GitHub) -->
+      <div class="max-w-3xl mx-auto mb-10">
+        <div class="rounded-2xl overflow-hidden border border-slate-700/80 bg-slate-900 shadow-xl shadow-black/30">
+          <img 
+            src="images/team.jpg" 
+            alt="Team MSS - SIH 2026" 
+            class="w-full h-auto object-cover max-h-[420px]"
+            loading="lazy"
+          />
+        </div>
+        <p class="text-center text-xs text-slate-500 mt-3 font-mono">Team MSS · SIH 2026</p>
+      </div>
+
+      <!-- Member Names Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">Sayan Kole</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Team Lead</p>
+          <p class="text-xs text-slate-500 mt-1">Hardware Architecture & BMS</p>
         </div>
 
-        <!-- MEMBER 3 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-layer-group"></i>
-          </div>
-          <h4 class="font-bold text-white text-base">Pavithran M</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">B T Sudharsan</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Firmware & Control</p>
+          <p class="text-xs text-slate-500 mt-1">Adaptive Refresh & Logic</p>
         </div>
 
-        <!-- MEMBER 4 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-laptop-code"></i>
-          </div>
-          <h4 class="font-bold text-white text-base">Sukhpreet kour</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">Pavithran M</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">PCB & Layout</p>
+          <p class="text-xs text-slate-500 mt-1">Schematic & Fabrication</p>
         </div>
 
-        <!-- MEMBER 5 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-vial-circle-check"></i>
-          </div>
-          <h4 class="font-bold text-white text-base">S Aravind</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">Sukhpreet Kour</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Testing & Validation</p>
+          <p class="text-xs text-slate-500 mt-1">Sensor Calibration & Analysis</p>
         </div>
 
-        <!-- MEMBER 6 -->
-        <div class="p-6 bg-slate-900 border border-slate-800 rounded-xl text-center">
-          <div class="w-16 h-16 rounded-full bg-slate-800 mx-auto flex items-center justify-center text-xl text-brand-glow mb-4">
-            <i class="fa-solid fa-book-bookmark"></i>
-          </div>
-          <h4 class="font-bold text-white text-base">Atharv Tiwari</h4>
-          <p class="text-xs text-brand-400 font-mono mt-1"></p>
-          <p class="text-xs text-slate-400 mt-2"></p>
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">S Aravind</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Thermal Systems</p>
+          <p class="text-xs text-slate-500 mt-1">Heat Loop & Packaging</p>
+        </div>
+
+        <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl text-center">
+          <h3 class="font-bold text-white text-sm">Atharv Tiwari</h3>
+          <p class="text-xs text-brand-400 font-mono mt-0.5">Documentation</p>
+          <p class="text-xs text-slate-500 mt-1">Reports & Presentation</p>
         </div>
 
       </div>
@@ -604,11 +654,11 @@ I
 
   <!-- ================= FOOTER ================= -->
   <footer class="py-8 bg-[#070a0f] text-center text-xs text-slate-500 font-mono">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <div>Smart India Hackathon 2026 • Hardware Edition</div>
-      <div>
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div>Smart India Hackathon 2026 · Hardware Edition</div>
+      <div class="flex items-center gap-3">
         <span>PS ID: SIH26049</span>
-        <span class="mx-2">•</span>
+        <span class="text-slate-700">•</span>
         <span>Team: MSS</span>
       </div>
     </div>
